@@ -15,3 +15,4 @@ db_proxy.sh
 *.log
 *.pot
 *.pyc
+.env

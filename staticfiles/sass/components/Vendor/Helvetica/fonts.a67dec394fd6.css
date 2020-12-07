@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Helvetica Neue LT Std 65 Medium'), url("HelveticaNeueLTStd-Md.f0d7d673ef06.otf") format('opentype');
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Helvetica Neue LT Std 45 Light'), url("helvetica-neue-lt-std-45-light.4f27a4e5a731.otf") format('opentype');
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Helvetica Neue LT Std 75 Bold'), url("HelveticaNeueLTStd-Bd.9ac7e2ff6b97.otf") format('opentype');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Helvetica Neue LT Std Regular Italic'), url("HelveticaNeueLTStd-MdIt.f02f3b1af0ed.otf") format('opentype');
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Helvetica Neue LT Std Bold Italic'), url("HelveticaNeueLTStd-BdIt.09ad3649cefc.otf") format('opentype');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Helvetica Neue LT Std 55 Roman'), url("HelveticaNeueLTStd-Roman.f0db0faa0f4a.otf") format('opentype');
+}

@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='homepage'),
     path('accounts/', include('allauth.urls')),
+    path('tjet', include('agritjet.urls', namespace='agritjet')),
 ]

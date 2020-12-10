@@ -30,7 +30,9 @@ STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_FROM_EMAIL = 'AgritJet <contact@peteranyaogu.me>'
-EMAIL_BACKEND = True
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 
 ADMINS = (('peter', 'contact@peteranyaogu.me'), )
 MANAGERS = ADMINS

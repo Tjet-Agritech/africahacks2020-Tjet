@@ -2,8 +2,6 @@
 *.sqlite3
 scripts/biuld_deploy.sh
 scripts/db_proxy.sh
-scripts/docker_biuld.sh
-scripts/docker_run.sh
 scripts/gcloud_biuld.sh
 scripts/gcloud_deploy.sh
 scripts/local_proxy.sh
@@ -15,4 +13,5 @@ db_proxy.sh
 *.log
 *.pot
 *.pyc
-.env
+*.env
+run.sh

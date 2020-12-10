@@ -45,6 +45,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tjet.urls'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend')
+
 TEMPLATE_DIR = Path(BASE_DIR, 'templates')
 
 TEMPLATES = [
@@ -116,47 +120,45 @@ LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = LOGIN_URL
 ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_URL
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 ## ------------- ALLAUTH SETTINGS ---------------##
 SITE_ID = os.getenv('SITE_ID')
 
-# provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
-    'facebook': {
-        'METHOD':
-        'oauth2',
-        'SDK_URL':
-        '//connect.facebook.net/{locale}/sdk.js',
-        'SCOPE': ['email', 'public_profile'],
-        'AUTH_PARAMS': {
-            'auth_type': 'reauthenticate'
-        },
-        'INIT_PARAMS': {
-            'cookie': True
-        },
-        'FIELDS': [
-            'id', 'first_name', 'last_name', 'middle_name', 'name',
-            'name_format', 'picture', 'short_name'
-        ],
-        'EXCHANGE_TOKEN':
-        True,
-        'LOCALE_FUNC':
-        lambda request: 'en_US',
-        'VERIFIED_EMAIL':
-        False,
-        'VERSION':
+ # provider specific settings
+ SOCIALACCOUNT_PROVIDERS = {
+     'google': {
+         'SCOPE': [
+             'profile',
+             'email',
+         ],
+         'AUTH_PARAMS': {
+             'access_type': 'online',
+         }
+     },
+     'facebook': {
+         'METHOD':
+         'oauth2',
+         'SDK_URL':
+         '//connect.facebook.net/{locale}/sdk.js',
+         'SCOPE': ['email', 'public_profile'],
+         'AUTH_PARAMS': {
+             'auth_type': 'reauthenticate'
+         },
+         'INIT_PARAMS': {
+             'cookie': True
+         },
+         'FIELDS': [
+             'id', 'first_name', 'last_name', 'middle_name', 'name',
+             'name_format', 'picture', 'short_name'
+         ],
+         'EXCHANGE_TOKEN':
+         True,
+         'LOCALE_FUNC':
+         lambda request: 'en_US',
+         'VERIFIED_EMAIL':
+         False,
+         'VERSION':
         'v7.0',
-    },
+     },
 }
 
 ACCOUNT_AUTHENTICATION_METHOD = "email"

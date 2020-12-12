@@ -19,7 +19,11 @@ from agritjet import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='homepage'),
-    path('accounts/', include('allauth.urls')),
-    path('tjet', include('agritjet.urls', namespace='agritjet')),
+    #path('', views.home, name='homepage'),
+    path('', include('django.contrib.auth.urls')),
+    path('', include('social_django.urls')),
+    path('logout', views.logout),
+    path('', include('agritjet.urls', namespace='agritjet')),
 ]
+
+handler404 = 'agritjet.views.handler404'

@@ -18,7 +18,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-env_path = BASE_DIR / '.env'
+env_path = BASE_DIR / '.env.env'
 
 load_dotenv(dotenv_path=env_path)
 
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -116,59 +117,29 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = Path(BASE_DIR, 'media/')
 
-LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = LOGIN_URL
-ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_URL
-
-## ------------- ALLAUTH SETTINGS ---------------##
-SITE_ID = os.getenv('SITE_ID')
-
- # provider specific settings
- SOCIALACCOUNT_PROVIDERS = {
-     'google': {
-         'SCOPE': [
-             'profile',
-             'email',
-         ],
-         'AUTH_PARAMS': {
-             'access_type': 'online',
-         }
-     },
-     'facebook': {
-         'METHOD':
-         'oauth2',
-         'SDK_URL':
-         '//connect.facebook.net/{locale}/sdk.js',
-         'SCOPE': ['email', 'public_profile'],
-         'AUTH_PARAMS': {
-             'auth_type': 'reauthenticate'
-         },
-         'INIT_PARAMS': {
-             'cookie': True
-         },
-         'FIELDS': [
-             'id', 'first_name', 'last_name', 'middle_name', 'name',
-             'name_format', 'picture', 'short_name'
-         ],
-         'EXCHANGE_TOKEN':
-         True,
-         'LOCALE_FUNC':
-         lambda request: 'en_US',
-         'VERIFIED_EMAIL':
-         False,
-         'VERSION':
-        'v7.0',
-     },
+# SOCIAL AUTH AUTH0 BACKEND CONFIG
+SOCIAL_AUTH_TRAILING_SLASH = False
+SOCIAL_AUTH_AUTH0_KEY = os.environ.get('AUTH0_CLIENT_ID')
+SOCIAL_AUTH_AUTH0_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
+SOCIAL_AUTH_AUTH0_SCOPE = ['openid', 'profile', 'email']
+SOCIAL_AUTH_AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+AUDIENCE = None
+if os.environ.get('AUTH0_AUDIENCE'):
+    AUDIENCE = os.environ.get('AUTH0_AUDIENCE')
+else:
+    if SOCIAL_AUTH_AUTH0_DOMAIN:
+        AUDIENCE = 'https://' + SOCIAL_AUTH_AUTH0_DOMAIN + '/userinfo'
+if AUDIENCE:
+    SOCIAL_AUTH_AUTH0_AUTH_EXTRA_ARGUMENTS = {'audience': AUDIENCE}
+AUTHENTICATION_BACKENDS = {
+    'agritjet.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
 }
 
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = LOGIN_REDIRECT_URL
+LOGIN_URL = '/login/auth0'
+LOGIN_REDIRECT_URL = '/'
+
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
 # debugging
 sentry_sdk.init(

@@ -5,9 +5,9 @@ from .installed import *
 
 print("using local proxy")
 
-PROXY_PSW = os.getenv("DB_USER_PSW")
-PROXY_USER = os.getenv("DB_USER_UN")
-PROXY_DB_NAME = os.getenv("DB_NAME", 'production')
+PROXY_PSW = os.getenv("PROXY_PSW")
+PROXY_USER = os.getenv("PROXY_USER")
+PROXY_DB_NAME = os.getenv("PROXY_DB_NAME", 'production')
 PROXY_PORT = os.getenv('PROXY_PORT')
 
 DATABASES = {

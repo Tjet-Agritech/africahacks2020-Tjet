@@ -4,21 +4,19 @@ DJANGO_DEFINED = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    #'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',  # required for allauth
 ]
 
-ALLAUTH = [
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    #'allauth.socialaccount.providers.google',
-    #'allauth.socialaccount.providers.facebook',
+AUTH0 = [
+    'social_django',
 ]
 
 TJET_APPS = [
     'agritjet',
+    'crispy_forms',
+    'django_countries',
 ]
 
-INSTALLED_APPS = DJANGO_DEFINED + ALLAUTH + TJET_APPS
+INSTALLED_APPS = DJANGO_DEFINED + AUTH0 + TJET_APPS

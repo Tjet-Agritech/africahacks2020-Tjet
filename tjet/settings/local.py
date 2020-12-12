@@ -10,6 +10,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
 
 DATABASES = {
     'default': {

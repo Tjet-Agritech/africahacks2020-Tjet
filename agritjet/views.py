@@ -1,13 +1,18 @@
 import random
 import string
+from urllib.parse import urlencode
 
 import stripe
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import get_object_or_404, redirect, render
+from django.http import HttpResponseRedirect
+from django.shortcuts import (get_object_or_404, redirect, render,
+                              render_to_response)
+from django.template import RequestContext
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, View
 
@@ -19,10 +24,34 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 # Create your views here.
 
 
-def home(request):
-    return render(request, 'commingsoon.html', {})
+# def home(request):
+#     return render(request, 'commingsoon.html', {})
 
+def index(request):
+    return render(request, 'home1.html', {})
 
+def cart(request):
+    return render(request, 'cart.html', {})
+
+def checkout(request):
+    return render(request, 'checkout.html', {})
+
+def myaccount(request):
+    return render(request, 'myaccount.html', {})
+
+def aboutus(request):
+    return render(request, 'aboutus.html', {})
+
+def logout(request):
+    log_out(request)
+    return_to = urlencode({'returnTo': request.build_absolute_uri('/')})
+    logout_url = 'https://%s/v2/logout?client_id=%s&%s' % \
+                 (settings.SOCIAL_AUTH_AUTH0_DOMAIN, settings.SOCIAL_AUTH_AUTH0_KEY, return_to)
+    return HttpResponseRedirect(logout_url)
+
+def handler404(request, exception):
+    return render(request, '404.html', {})
+    
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits,
                                   k=20))

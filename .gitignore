@@ -8,10 +8,11 @@ scripts/local_proxy.sh
 scripts/local.sh
 scripts/migrate_proxy_db.sh
 .pot
-db
+db/
 db_proxy.sh
 *.log
 *.pot
 *.pyc
 *.env
 run.sh
+.vscode

@@ -26,8 +26,8 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
 
 DEFAULT_FROM_EMAIL = 'AgritJet <contact@peteranyaogu.me>'
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
